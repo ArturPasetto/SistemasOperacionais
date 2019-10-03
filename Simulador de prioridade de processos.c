@@ -3,7 +3,8 @@
 #include <string.h>
 #include <time.h>
 #define TAMANHO 5
-#define TAM 100
+#define TAMANHOCHAR 100
+#define QUANTUM 3000
 
 /*
 	0 - Kernel
@@ -15,7 +16,6 @@
 typedef struct sProcesso{
 	char nome[100];
 	int prioridade;
-	int cont;
 } Processo;
 
 int sortearPrioridade(){
@@ -27,11 +27,10 @@ Processo* criarProcesso(int numero){
 	processo->prioridade=sortearPrioridade();
 	
 	strcpy(processo->nome,"processo ");
-	char x[TAM];
+	char x[TAMANHOCHAR];
 	strcpy(x,itoa(numero,x,10));
 	strcat(processo->nome,x);	
-	
-	processo->cont= 1;
+
 	return processo;
 }
 
@@ -97,7 +96,7 @@ void processar(Processo* lista[TAMANHO], Processo* proc){
 	
 	sleep(1);
 	
-	while(clock()%3000!=0){}
+	while(clock()%QUANTUM!=0){}
 	
 	printf("processado\n\n");
 	
